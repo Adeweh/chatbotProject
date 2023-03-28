@@ -1,2 +1,15 @@
-package com.example.chatbotproject.config;public class AppConfig {
+package com.example.chatbotproject.config;
+
+import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
+
+@Configuration
+public class AppConfig {
+    @Bean
+    public RestTemplate restTemplate(){
+
+        return new RestTemplate();
+    }
 }
