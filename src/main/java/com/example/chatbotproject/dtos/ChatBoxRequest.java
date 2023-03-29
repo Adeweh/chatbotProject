@@ -1,6 +1,6 @@
 package com.example.chatbotproject.dtos;
 
-import com.example.chatbotproject.model.Chat;
+import com.example.chatbotproject.model.Message;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,5 +14,5 @@ import java.util.List;
 @Builder
 public class ChatBoxRequest {
     private String model = "gpt-3.5-turbo";
-    private List<Chat> messages;
+    private List<Message> messages;
 }

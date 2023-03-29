@@ -1,6 +1,7 @@
 package com.example.chatbotproject.service;
 
 import com.example.chatbotproject.dtos.ChatBoxRequest;
+import com.example.chatbotproject.repository.ResponseRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
@@ -17,6 +18,7 @@ import java.util.Objects;
 public class ChatBoxServiceImpl implements ChatBoxService{
 
     private final RestTemplate restTemplate;
+    private final ResponseRepository repository;
 
     private final String addToken = System.getenv("SECRET.KEY");
     private final String addURL = System.getenv("URL");
@@ -28,7 +30,8 @@ public class ChatBoxServiceImpl implements ChatBoxService{
 
         HttpEntity<?> httpEntity = new HttpEntity<>(chatBoxRequest, httpHeaders);
         ResponseEntity<?> response = restTemplate.exchange(addURL, HttpMethod.POST, httpEntity, Object.class);
+//        repository.save(response);
 
-        return response;
+        return response.getBody();
     }
 }
