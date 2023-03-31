@@ -1,6 +1,7 @@
 package com.example.chatbotproject.service;
 
 import com.example.chatbotproject.dtos.ChatBoxRequest;
+import com.example.chatbotproject.model.ResponseData;
 import com.example.chatbotproject.repository.ResponseRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,10 @@ public class ChatBoxServiceImpl implements ChatBoxService{
 
         HttpEntity<?> httpEntity = new HttpEntity<>(chatBoxRequest, httpHeaders);
         ResponseEntity<?> response = restTemplate.exchange(addURL, HttpMethod.POST, httpEntity, Object.class);
-//        repository.save(response);
+        Object savedResponse = response.getBody();
+        ResponseData responseData = new ResponseData();
+        responseData.setResponse(savedResponse);
+        repository.save(responseData);
 
         return response.getBody();
     }
