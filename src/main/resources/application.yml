@@ -3,3 +3,6 @@ spring:
     mongodb:
       database: chat-bot
       uri: mongodb://localhost:27017/chat-bot
+
+server:
+  port: 8090

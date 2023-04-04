@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface ChatBoxService {
-    Object callExternalAPI(ChatBoxRequest chatBoxRequest);
+    Object callExternalAPI(String Id, ChatBoxRequest chatBoxRequest);
 }

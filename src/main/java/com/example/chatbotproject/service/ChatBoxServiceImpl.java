@@ -2,7 +2,9 @@ package com.example.chatbotproject.service;
 
 import com.example.chatbotproject.dtos.ChatBoxRequest;
 import com.example.chatbotproject.model.ResponseData;
+import com.example.chatbotproject.model.User;
 import com.example.chatbotproject.repository.ResponseRepository;
+import com.example.chatbotproject.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
@@ -21,10 +23,14 @@ public class ChatBoxServiceImpl implements ChatBoxService{
     private final RestTemplate restTemplate;
     private final ResponseRepository repository;
 
+    private final UserRepository userRepository;
+
     private final String addToken = System.getenv("SECRET.KEY");
     private final String addURL = System.getenv("URL");
     @Override
-    public Object callExternalAPI(ChatBoxRequest chatBoxRequest) {
+    public Object callExternalAPI(String email, ChatBoxRequest chatBoxRequest) {
+        User user = userRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("User no dey"));
+
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(HttpHeaders.AUTHORIZATION, "Bearer " + addToken );
         httpHeaders.add(HttpHeaders.CONTENT_TYPE, "application/json");
@@ -35,6 +41,8 @@ public class ChatBoxServiceImpl implements ChatBoxService{
         ResponseData responseData = new ResponseData();
         responseData.setResponse(savedResponse);
         repository.save(responseData);
+        user.setResponseData(responseData);
+        userRepository.save(user);
 
         return response.getBody();
     }

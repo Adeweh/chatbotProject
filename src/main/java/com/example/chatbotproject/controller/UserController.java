@@ -4,6 +4,8 @@ import com.example.chatbotproject.dtos.UserRequest;
 import com.example.chatbotproject.dtos.UserResponse;
 import com.example.chatbotproject.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,9 +22,9 @@ public class UserController {
         UserResponse response = userService.registerUser(userRequest);
         return new ResponseEntity<>(response, OK);
     }
-    @PostMapping("/loginUser")
-    public ResponseEntity<UserResponse> loginUser( @RequestBody UserRequest userRequest)  {
-        UserResponse response = userService.loginUser(userRequest);
-        return new ResponseEntity<>(response, OK);
-    }
+//    @PostMapping("/loginUser")
+//    public ResponseEntity<UserResponse> loginUser( @RequestBody UserRequest userRequest)  {
+//        UserResponse response = userService.loginUser(userRequest);
+//        return new ResponseEntity<>(response, OK);
+//    }
 }

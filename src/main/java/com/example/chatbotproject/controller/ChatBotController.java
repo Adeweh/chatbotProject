@@ -4,10 +4,7 @@ import com.example.chatbotproject.dtos.ChatBoxRequest;
 import com.example.chatbotproject.service.ChatBoxService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RequestMapping("/api/v1/chat")
@@ -16,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ChatBotController {
     private final ChatBoxService chatBoxService;
 
-    @PostMapping("/response")
-    public ResponseEntity<?> callExternalAPI(@RequestBody ChatBoxRequest chatBoxRequest){
-        return ResponseEntity.ok(chatBoxService.callExternalAPI(chatBoxRequest));
+    @PostMapping("/response/{email}")
+    public ResponseEntity<?> callExternalAPI(@PathVariable String email,  @RequestBody ChatBoxRequest chatBoxRequest){
+        return ResponseEntity.ok(chatBoxService.callExternalAPI(email, chatBoxRequest));
     }
 }

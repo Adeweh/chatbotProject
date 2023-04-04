@@ -14,5 +14,6 @@ public class User {
     private String id;
     private String email;
     private String password;
+    private ResponseData responseData;
 
 }
