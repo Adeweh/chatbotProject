@@ -1,15 +1,18 @@
 package com.example.chatbotproject.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class User {
+
     @Id
     private String id;
-    private String userName;
-    private Responses responses;
-    private Prompts prompts;
+    private String email;
+    private String password;
+
 }
